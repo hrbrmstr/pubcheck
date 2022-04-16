@@ -1,7 +1,7 @@
 Package: pubcheck
 Type: Package
 Title: Check Safety of SSH Public Keys
-Version: 0.1.0
+Version: 0.2.0
 Date: 2022-04-16
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 

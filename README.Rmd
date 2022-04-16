@@ -64,6 +64,12 @@ check_gh_following("koenrh") |>
   knitr::kable()
 ```
 
+```{r ex-04}
+check_gh_repo_contributors("hrbrmstr", "ggalt") |> 
+  mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
+  knitr::kable()
+```
+
 ## pubcheck Metrics
 
 ```{r cloc, echo=FALSE}

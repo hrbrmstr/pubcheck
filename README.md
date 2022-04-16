@@ -30,6 +30,8 @@ The following functions are implemented:
 
 -   `check_gh_following`: Check all SSH keys of GitHub users a
     particular account is following
+-   `check_gh_repo_contributors`: Check all SSH keys of GitHub users a
+    particular account is following
 -   `check_gh_user_keys`: Check one or more GitHub user’s keys
 -   `check_ssh_pub_key`: Check one SSH public key
 
@@ -50,7 +52,7 @@ library(tidyverse)
 
 # current version
 packageVersion("pubcheck")
-## [1] '0.1.0'
+## [1] '0.2.0'
 ```
 
 ### Local file
@@ -96,14 +98,45 @@ check_gh_following("koenrh") |>
 | framer | NA                              | NA   |   NA | NA                                                                    |
 | jurre  | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa  | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
 
+``` r
+check_gh_repo_contributors("hrbrmstr", "ggalt") |> 
+  mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
+  knitr::kable()
+```
+
+| user        | key                             | algo    |  len | status                                                                |
+|:------------|:--------------------------------|:--------|-----:|:----------------------------------------------------------------------|
+| hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hcraT       | NA                              | NA      |   NA | NA                                                                    |
+| yonicd      | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 3072 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| yonicd      | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| yonicd      | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
+| yonicd      | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
+| bbolker     | ssh-rsa AAAAB3NzaC1yc2EAAAABIw… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| benmarwick  | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| cpsievert   | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| jankatins   | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| jankatins   | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
+| jonocarroll | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
+| jonocarroll | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| jonocarroll | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| jonocarroll | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
+| pkq         | NA                              | NA      |   NA | NA                                                                    |
+| rplzzz      | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 3072 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| jjchern     | NA                              | NA      |   NA | NA                                                                    |
+| larmarange  | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
+| larmarange  | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
+
 ## pubcheck Metrics
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 |:-----|---------:|-----:|----:|-----:|------------:|-----:|---------:|-----:|
-| R    |        6 | 0.33 |  99 | 0.33 |          29 | 0.24 |       36 | 0.24 |
-| YAML |        2 | 0.11 |  35 | 0.12 |          10 | 0.08 |        2 | 0.01 |
-| Rmd  |        1 | 0.06 |  18 | 0.06 |          21 | 0.17 |       37 | 0.25 |
-| SUM  |        9 | 0.50 | 152 | 0.50 |          60 | 0.50 |       75 | 0.50 |
+| R    |        6 | 0.33 | 111 | 0.33 |          35 | 0.26 |       46 | 0.26 |
+| YAML |        2 | 0.11 |  35 | 0.10 |          10 | 0.07 |        2 | 0.01 |
+| Rmd  |        1 | 0.06 |  21 | 0.06 |          22 | 0.16 |       39 | 0.22 |
+| SUM  |        9 | 0.50 | 167 | 0.50 |          67 | 0.50 |       87 | 0.50 |
 
 clock Package Metrics for pubcheck
 
