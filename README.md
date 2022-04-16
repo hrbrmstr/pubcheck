@@ -68,16 +68,20 @@ check_ssh_pub_key("~/.ssh/id_rsa.pub") |>
 ### A GitHub user
 
 ``` r
-check_gh_user_keys("hrbrmstr") |> 
+check_gh_user_keys(c("hrbrmstr", "mikemahoney218")) |> 
   mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
   knitr::kable()
 ```
 
-| user     | key                             | algo |  len | status                                                                |
-|:---------|:--------------------------------|:-----|-----:|:----------------------------------------------------------------------|
-| hrbrmstr | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa  | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
-| hrbrmstr | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa  | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
-| hrbrmstr | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa  | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| user           | key                             | algo    |  len | status                                                                |
+|:---------------|:--------------------------------|:--------|-----:|:----------------------------------------------------------------------|
+| hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| mikemahoney218 | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
+| mikemahoney218 | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
+| mikemahoney218 | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
+| mikemahoney218 | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
 
 ### Keys of all the users a GitHub account is following
 
@@ -96,10 +100,10 @@ check_gh_following("koenrh") |>
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 |:-----|---------:|-----:|----:|-----:|------------:|-----:|---------:|-----:|
-| R    |        6 | 0.33 |  98 | 0.32 |          28 | 0.24 |       36 | 0.24 |
+| R    |        6 | 0.33 |  99 | 0.33 |          29 | 0.24 |       36 | 0.24 |
 | YAML |        2 | 0.11 |  35 | 0.12 |          10 | 0.08 |        2 | 0.01 |
-| Rmd  |        1 | 0.06 |  18 | 0.06 |          21 | 0.18 |       37 | 0.25 |
-| SUM  |        9 | 0.50 | 151 | 0.50 |          59 | 0.50 |       75 | 0.50 |
+| Rmd  |        1 | 0.06 |  18 | 0.06 |          21 | 0.17 |       37 | 0.25 |
+| SUM  |        9 | 0.50 | 152 | 0.50 |          60 | 0.50 |       75 | 0.50 |
 
 clock Package Metrics for pubcheck
 

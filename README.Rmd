@@ -51,7 +51,7 @@ check_ssh_pub_key("~/.ssh/id_rsa.pub") |>
 ### A GitHub user
 
 ```{r ex-02}
-check_gh_user_keys("hrbrmstr") |> 
+check_gh_user_keys(c("hrbrmstr", "mikemahoney218")) |> 
   mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
   knitr::kable()
 ```
