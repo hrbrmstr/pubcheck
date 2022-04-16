@@ -1,5 +1,7 @@
 key_check <- \(algo, len) {
 
+  len <- as.integer(trimws(len))
+
   if (is.na(algo) || is.na(len)) return(NA_character_)
 
   if (algo == "dsa") {
