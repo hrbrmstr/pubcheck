@@ -4,15 +4,16 @@
 \name{pubcheck}
 \alias{pubcheck}
 \alias{pubcheck-package}
-\title{...}
+\title{Check Safety of SSH Public Keys}
 \description{
-A good description goes here otherwise CRAN checks fail.
+SSH is great! Poorly-configured SSH keys are not. Tools are provided to assess the
+safety of SSH public keys in multiple contexts.
 }
 \seealso{
 Useful links:
 \itemize{
-  \item \url{https://git.rud.is/hrbrmstr/pubcheck}
-  \item Report bugs at \url{https://git.rud.is/hrbrmstr/pubcheck/issues}
+  \item \url{https://github.com/hrbrmstr/pubcheck}
+  \item Report bugs at \url{https://github.com/hrbrmstr/pubcheck/issues}
 }
 
 }
