@@ -32,7 +32,6 @@ hrbrpkghelpr::install_block()
 ## Usage
 
 ```{r lib-ex}
-library(gt)
 library(pubcheck)
 library(tidyverse)
 
@@ -41,22 +40,28 @@ packageVersion("pubcheck")
 
 ```
 
+### Local file
+
 ```{r ex-01}
 check_ssh_pub_key("~/.ssh/id_rsa.pub") |> 
   mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
-  gt::gt()
+  knitr::kable()
 ```
+
+### A GitHub user
 
 ```{r ex-02}
 check_gh_user_keys("hrbrmstr") |> 
   mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
-  gt::gt()
+  knitr::kable()
 ```
+
+### Keys of all the users a GitHub account is following
 
 ```{r ex-03}
 check_gh_following("koenrh") |> 
   mutate(key = ifelse(is.na(key), NA_character_, sprintf("%s…", substr(key, 1, 30)))) |> 
-  gt::gt()
+  knitr::kable()
 ```
 
 ## pubcheck Metrics
