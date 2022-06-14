@@ -5,7 +5,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 [![Signed
 by](https://img.shields.io/badge/Keybase-Verified-brightgreen.svg)](https://keybase.io/hrbrmstr)
 ![Signed commit
-%](https://img.shields.io/badge/Signed_Commits-100%25-lightgrey.svg)
+%](https://img.shields.io/badge/Signed_Commits-0%25-lightgrey.svg)
 [![R-CMD-check](https://github.com/hrbrmstr/pubcheck/workflows/R-CMD-check/badge.svg)](https://github.com/hrbrmstr/pubcheck/actions?query=workflow%3AR-CMD-check)
 [![Linux build
 Status](https://travis-ci.org/hrbrmstr/pubcheck.svg?branch=master)](https://travis-ci.org/hrbrmstr/pubcheck)
@@ -30,6 +30,8 @@ The following functions are implemented:
 
 -   `check_gh_following`: Check all SSH keys of GitHub users a
     particular account is following
+-   `check_gh_org_members`: Check all SSH keys of GitHub users that are
+    members of a specified GitHub organization
 -   `check_gh_repo_contributors`: Check all SSH keys of GitHub users a
     particular account is following
 -   `check_gh_user_keys`: Check one or more GitHub user’s keys
@@ -52,7 +54,7 @@ library(tidyverse)
 
 # current version
 packageVersion("pubcheck")
-## [1] '0.2.0'
+## [1] '0.3.0'
 ```
 
 ### Local file
@@ -63,9 +65,9 @@ check_ssh_pub_key("~/.ssh/id_rsa.pub") |>
   knitr::kable()
 ```
 
-| key                             | algo |  len | status                                                                |
-|:--------------------------------|:-----|-----:|:----------------------------------------------------------------------|
-| ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa  | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| key                             | algo |  len | status         |
+|:--------------------------------|:-----|-----:|:---------------|
+| ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa  | 4096 | ✅ Key is safe |
 
 ### A GitHub user
 
@@ -79,7 +81,7 @@ check_gh_user_keys(c("hrbrmstr", "mikemahoney218")) |>
 |:---------------|:--------------------------------|:--------|-----:|:----------------------------------------------------------------------|
 | hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
 | hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
-| hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hrbrmstr       | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
 | mikemahoney218 | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
 | mikemahoney218 | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
 | mikemahoney218 | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
@@ -108,7 +110,7 @@ check_gh_repo_contributors("hrbrmstr", "ggalt") |>
 |:------------|:--------------------------------|:--------|-----:|:----------------------------------------------------------------------|
 | hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
 | hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
-| hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
+| hrbrmstr    | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
 | hcraT       | NA                              | NA      |   NA | NA                                                                    |
 | yonicd      | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 3072 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
 | yonicd      | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
@@ -121,7 +123,6 @@ check_gh_repo_contributors("hrbrmstr", "ggalt") |>
 | jankatins   | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
 | jonocarroll | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 4096 | ✅ Key is safe                                                        |
 | jonocarroll | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
-| jonocarroll | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 2048 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
 | jonocarroll | ssh-ed25519 AAAAC3NzaC1lZDI1NT… | ed25519 |  256 | ✅ Key is safe                                                        |
 | pkq         | NA                              | NA      |   NA | NA                                                                    |
 | rplzzz      | ssh-rsa AAAAB3NzaC1yc2EAAAADAQ… | rsa     | 3072 | ✅ Key is safe; For the RSA algorithm at least 2048, recommended 4096 |
@@ -133,10 +134,10 @@ check_gh_repo_contributors("hrbrmstr", "ggalt") |>
 
 | Lang | \# Files |  (%) | LoC |  (%) | Blank lines |  (%) | \# Lines |  (%) |
 |:-----|---------:|-----:|----:|-----:|------------:|-----:|---------:|-----:|
-| R    |        6 | 0.33 | 111 | 0.33 |          35 | 0.26 |       46 | 0.26 |
-| YAML |        2 | 0.11 |  35 | 0.10 |          10 | 0.07 |        2 | 0.01 |
-| Rmd  |        1 | 0.06 |  21 | 0.06 |          22 | 0.16 |       39 | 0.22 |
-| SUM  |        9 | 0.50 | 167 | 0.50 |          67 | 0.50 |       87 | 0.50 |
+| R    |        7 | 0.35 | 124 | 0.34 |          41 | 0.28 |       55 | 0.29 |
+| YAML |        2 | 0.10 |  35 | 0.10 |          10 | 0.07 |        2 | 0.01 |
+| Rmd  |        1 | 0.05 |  21 | 0.06 |          22 | 0.15 |       39 | 0.20 |
+| SUM  |       10 | 0.50 | 180 | 0.50 |          73 | 0.50 |       96 | 0.50 |
 
 clock Package Metrics for pubcheck
 
