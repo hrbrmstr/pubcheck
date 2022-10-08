@@ -1,8 +1,8 @@
 Package: pubcheck
 Type: Package
 Title: Check Safety of SSH Public Keys
-Version: 0.3.0
-Date: 2022-06-14
+Version: 0.4.0
+Date: 2022-10-08
 Authors@R: c(
     person("Bob", "Rudis", email = "bob@rud.is", role = c("aut", "cre"), 
            comment = c(ORCID = "0000-0001-5670-2640"))
@@ -15,11 +15,14 @@ BugReports: https://github.com/hrbrmstr/pubcheck/issues
 Encoding: UTF-8
 License: MIT + file LICENSE
 Suggests:
-    tinytest
+    tinytest,
+    argparser,
+    jsonlite,
+    pander
 Depends:
     R (>= 4.1.0)
 Imports:
     gt,
     openssl
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.0
+RoxygenNote: 7.2.1
